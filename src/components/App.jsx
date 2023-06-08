@@ -1,16 +1,11 @@
+import { GlobalStyle } from './GlobalStyle';
+import { UserRouters } from './UserRouters';
+
 export const App = () => {
   return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}
-    >
-      React homework template
-    </div>
+    <>
+      <GlobalStyle /> {/* Глобальні стилі */}
+      <UserRouters /> {/* Список маршрутів */}
+    </>
   );
 };
