@@ -1,9 +1,8 @@
 import { Field, Formik } from 'formik';
 import * as Yup from 'yup';
-import { Form, Label, ErrorMessage, Button } from './ContactForm.styled';
-import { useSelector, useDispatch } from 'react-redux';
-import { selectContacts } from 'redux/selectors';
-import { addContact } from 'redux/contacts/operations';
+import { Form, Label, ErrorMessage, Button } from './ContactFormEdit.styled';
+import { useDispatch } from 'react-redux';
+import { editContact } from 'redux/contacts/operations';
 
 /* Схема валідації */
 const ContactSchema = Yup.object().shape({
@@ -20,31 +19,22 @@ const ContactSchema = Yup.object().shape({
 });
 
 /* Компонент ContactForm */
-export const ContactForm = () => {
-  const contacts = useSelector(selectContacts);
+export const ContactFormEdit = ({ closeModal, contact }) => {
+  const { id, name, number } = contact;
   const dispatch = useDispatch();
 
-  /* Додавання контакту */
+  /* Редагування контакту */
   const handleSubmit = newContact => {
-    if (
-      contacts.filter(
-        item =>
-          item.name.toLowerCase().trim() ===
-          newContact.name.toLowerCase().trim()
-      ).length > 0
-    ) {
-      alert(`${newContact.name} is already in contacts`);
-      return;
-    }
-    dispatch(addContact(newContact));
+    dispatch(editContact(newContact));
+    closeModal(); // закриваємо модальне вікно
   };
 
   return (
     <Formik
-      initialValues={{ name: '', phone: '' }}
+      initialValues={{ name, number }}
       validationSchema={ContactSchema}
       onSubmit={(values, actions) => {
-        handleSubmit({ ...values });
+        handleSubmit({ id, ...values });
         actions.resetForm();
       }}
     >
@@ -55,7 +45,7 @@ export const ContactForm = () => {
         <Label htmlFor="number">Number</Label>
         <Field type="tel" name="number" />
         <ErrorMessage name="number" component="div"></ErrorMessage>
-        <Button type="submit">Add contact</Button>
+        <Button type="submit">Save contact</Button>
       </Form>
     </Formik>
   );

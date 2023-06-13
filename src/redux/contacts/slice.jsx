@@ -1,5 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchContacts, addContact, deleteContact } from './operations';
+import {
+  fetchContacts,
+  addContact,
+  editContact,
+  deleteContact,
+} from './operations';
 
 /* Редюсер при запиті */
 const pendingReducer = state => {
@@ -26,10 +31,24 @@ const addContactFullfieldReducer = (state, action) => {
   state.items.push(action.payload);
 };
 
+/* Редюсер успішного редагування контакту */
+const editContactFullfieldReducer = (state, action) => {
+  state.isLoading = false;
+  state.error = null;
+
+  const index = state.items.findIndex(
+    contact => contact.id === action.payload.id
+  );
+  if (index !== -1) {
+    state.items[index] = action.payload;
+  }
+};
+
 /* Редюсер успішного видалення контакту */
 const deleteContactFullfieldReducer = (state, action) => {
   state.isLoading = false;
   state.error = null;
+
   const index = state.items.findIndex(
     contact => contact.id === action.payload.id
   );
@@ -54,6 +73,9 @@ const contactsSlice = createSlice({
       .addCase(addContact.pending, pendingReducer)
       .addCase(addContact.fulfilled, addContactFullfieldReducer)
       .addCase(addContact.rejected, rejectedReducer)
+      .addCase(editContact.pending, pendingReducer)
+      .addCase(editContact.fulfilled, editContactFullfieldReducer)
+      .addCase(editContact.rejected, rejectedReducer)
       .addCase(deleteContact.pending, pendingReducer)
       .addCase(deleteContact.fulfilled, deleteContactFullfieldReducer)
       .addCase(deleteContact.rejected, rejectedReducer),

@@ -4,6 +4,8 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
 
 // Utility to add JWT
+// common - означає, що на всі типи запитів (get, post і т.д.) ставимо токен в заголовку
+// bearer - означає "носій", це зарезервована назва
 const setAuthHeader = token => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
