@@ -3,6 +3,7 @@ import { Filter } from '../components/Filter/Filter';
 import { Modal } from 'components/Modal/Modal';
 import { ContactFormAdd } from 'components/ContactFormAdd/ContactFormAdd';
 import { useState } from 'react';
+import { Button } from 'components/Button/Button.styled';
 
 const Contacts = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -21,7 +22,7 @@ const Contacts = () => {
     <>
       <h2>Contacts</h2>
       <Filter />
-      <button onClick={openModal}>Add Contact</button>
+      <Button onClick={openModal}>Add Contact</Button>
       <ContactList />
       {isModalOpen && (
         <Modal onClose={closeModal}>

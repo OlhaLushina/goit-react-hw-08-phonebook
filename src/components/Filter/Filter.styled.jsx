@@ -5,7 +5,7 @@ export const Container = styled.div`
   flex-direction: column;
   gap: 10px;
   width: 400px;
-  margin-bottom: 70px;
+  margin-bottom: 20px;
 `;
 
 export const Label = styled.label`

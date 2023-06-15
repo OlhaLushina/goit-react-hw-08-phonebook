@@ -6,15 +6,11 @@ export const Item = styled.li`
   list-style: none;
 `;
 
-export const Button = styled.button`
-  padding: 10px 20px;
-  background-image: linear-gradient(-180deg, #37aee2 0%, #1e96c8 100%);
-  color: #ffffff;
-  border-radius: 5px;
-  border: none;
-  cursor: pointer;
+export const Info = styled.div`
+  width: 600px;
+`;
 
-  :hover {
-    background-image: linear-gradient(-180deg, #1d95c9 0%, #17759c 100%);
-  }
+export const Buttons = styled.div`
+  display: flex;
+  gap: 10px;
 `;

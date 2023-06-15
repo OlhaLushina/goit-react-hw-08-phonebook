@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import { Item, Button } from './ContactItem.styled';
+import { Item, Info, Buttons } from './ContactItem.styled';
 import { deleteContact } from 'redux/contacts/operations';
 import { Modal } from 'components/Modal/Modal';
 import { ContactFormEdit } from 'components/ContactFormEdit/ContactFormEdit';
 import { useState } from 'react';
+import { Button } from 'components/Button/Button.styled';
 
 export const ContactItem = ({ contact }) => {
   const { id, name, number } = contact;
@@ -23,8 +24,13 @@ export const ContactItem = ({ contact }) => {
 
   return (
     <Item>
-      {name} {number} <Button onClick={openModal}>Edit</Button>
-      <Button onClick={() => dispatch(deleteContact(id))}>Delete</Button>
+      <Info>
+        {name} {number}{' '}
+      </Info>
+      <Buttons>
+        <Button onClick={openModal}>Edit</Button>
+        <Button onClick={() => dispatch(deleteContact(id))}>Delete</Button>
+      </Buttons>
       {isModalOpen && (
         <Modal onClose={closeModal}>
           <ContactFormEdit closeModal={closeModal} contact={contact} />
